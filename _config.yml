@@ -50,7 +50,7 @@ tag_map:
 ## 0: Fully Disable
 archive: 2
 category: 2
-tag: 2
+tag: 2 
 
 deploy:
   type: git
