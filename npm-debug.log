@@ -1,0 +1,83 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'hexo-deployer-git@0.1.0',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ 'hexo-deployer-git@0.1.0', null ]
+6 verbose cache add name=undefined spec="hexo-deployer-git@0.1.0" args=["hexo-deployer-git@0.1.0",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'hexo-deployer-git@0.1.0',
+7 verbose parsed url   path: 'hexo-deployer-git@0.1.0',
+7 verbose parsed url   href: 'hexo-deployer-git@0.1.0' }
+8 verbose cache add name="hexo-deployer-git" spec="0.1.0" args=["hexo-deployer-git","0.1.0"]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: '0.1.0',
+9 verbose parsed url   path: '0.1.0',
+9 verbose parsed url   href: '0.1.0' }
+10 verbose addNamed [ 'hexo-deployer-git', '0.1.0' ]
+11 verbose addNamed [ '0.1.0', '0.1.0' ]
+12 silly lockFile 999dd1e1-hexo-deployer-git-0-1-0 hexo-deployer-git@0.1.0
+13 verbose lock hexo-deployer-git@0.1.0 /Users/tomchambers/.npm/999dd1e1-hexo-deployer-git-0-1-0.lock
+14 verbose request where is /hexo-deployer-git
+15 verbose request registry https://registry.npmjs.org/
+16 verbose request id 5290412bbeb5eb78
+17 verbose url raw /hexo-deployer-git
+18 verbose url resolving [ 'https://registry.npmjs.org/', './hexo-deployer-git' ]
+19 verbose url resolved https://registry.npmjs.org/hexo-deployer-git
+20 verbose request where is https://registry.npmjs.org/hexo-deployer-git
+21 info trying registry request attempt 1 at 12:59:03
+22 verbose etag "43PRL2PEE2SGZI69GKKL0TVRN"
+23 http GET https://registry.npmjs.org/hexo-deployer-git
+24 http 304 https://registry.npmjs.org/hexo-deployer-git
+25 silly registry.get cb [ 304,
+25 silly registry.get   { date: 'Sat, 28 Mar 2015 12:59:04 GMT',
+25 silly registry.get     server: 'Apache',
+25 silly registry.get     via: '1.1 varnish',
+25 silly registry.get     'last-modified': 'Sat, 28 Mar 2015 12:59:04 GMT',
+25 silly registry.get     'cache-control': 'max-age=60',
+25 silly registry.get     etag: '"43PRL2PEE2SGZI69GKKL0TVRN"',
+25 silly registry.get     age: '0',
+25 silly registry.get     'x-served-by': 'cache-lcy1122-LCY',
+25 silly registry.get     'x-cache': 'MISS',
+25 silly registry.get     'x-cache-hits': '0',
+25 silly registry.get     'x-timer': 'S1427547544.114933,VS0,VE92',
+25 silly registry.get     vary: 'Accept',
+25 silly registry.get     'content-length': '0',
+25 silly registry.get     'keep-alive': 'timeout=10, max=50',
+25 silly registry.get     connection: 'Keep-Alive' } ]
+26 verbose etag https://registry.npmjs.org/hexo-deployer-git from cache
+27 silly lockFile 999dd1e1-hexo-deployer-git-0-1-0 hexo-deployer-git@0.1.0
+28 silly lockFile 999dd1e1-hexo-deployer-git-0-1-0 hexo-deployer-git@0.1.0
+29 error Error: version not found: hexo-deployer-git@0.1.0
+29 error     at /usr/local/lib/node_modules/npm/lib/cache/add-named.js:125:12
+29 error     at saved (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:167:7)
+29 error     at Object.oncomplete (fs.js:108:15)
+30 error If you need help, you may report this *entire* log,
+30 error including the npm and node versions, at:
+30 error     <http://github.com/npm/npm/issues>
+31 error System Darwin 14.3.0
+32 error command "node" "/usr/local/bin/npm" "install" "hexo-deployer-git@0.1.0" "--save"
+33 error cwd /Users/tomchambers/projects/tomchambers-tech2
+34 error node -v v0.10.35
+35 error npm -v 1.4.28
+36 verbose exit [ 1, true ]
