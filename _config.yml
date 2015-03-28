@@ -52,12 +52,6 @@ archive: 2
 category: 2
 tag: 2 
 
-deploy:
-  type: git
-  repo: https://github.com/tomchambers2/tomchambers-tech-blog
-  branch: gh-pages
-  message: "hexo auto deploy"
-
 # Server
 ## Hexo uses Connect as a server
 ## You can customize the logger format as defined in
@@ -88,7 +82,12 @@ disqus_shortname:
 theme: apollo
 exclude_generator:
 
+plugins:
+- hexo-generator-cname
+
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: github
+  repo: git@github.com:tomchambers2/tomchambers-tech-blog.git
+  branch: gh-pages
