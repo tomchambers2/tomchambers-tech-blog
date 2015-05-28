@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Box of Wonder | Tom Chambers&#39; Tech Blog</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="The Box of Wonder is a high tech fortune cookie. You put your head inside, the box scans you and prints out a prediction of your personality and date of death. It’s better with the mystery, but for th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Box of Wonder">
+<meta property="og:url" content="http://tech-blog.tomchambers.me/2015/03/28/box-of-wonder/index.html">
+<meta property="og:site_name" content="Tom Chambers' Tech Blog">
+<meta property="og:description" content="The Box of Wonder is a high tech fortune cookie. You put your head inside, the box scans you and prints out a prediction of your personality and date of death. It’s better with the mystery, but for th">
+<meta property="og:image" content="http://tech-blog.tomchambers.me/images/box-of-wonder-1.jpg">
+<meta property="og:image" content="http://tech-blog.tomchambers.me/images/box-of-wonder-2.jpg">
+<meta property="og:updated_time" content="2015-05-26T22:24:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Box of Wonder">
+<meta name="twitter:description" content="The Box of Wonder is a high tech fortune cookie. You put your head inside, the box scans you and prints out a prediction of your personality and date of death. It’s better with the mystery, but for th">
+  
+    <link rel="alternative" href="/atom.xml" title="Tom Chambers&#39; Tech Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<div style="text-align:center">
+	<img src="/images/tom-chambers-robot-face.png" alt="">
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">Tom Chambers&#39; Tech Blog</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://tech-blog.tomchambers.me"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-box-of-wonder" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/03/28/box-of-wonder/" class="article-date">
+  <time datetime="2015-03-28T18:00:33.000Z" itemprop="datePublished">2015-03-28</time>
+</a>
+		</span>
+		<span class="meta-elements author">Tom Chambers</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      Box of Wonder
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>The Box of Wonder is a high tech fortune cookie. You put your head inside, the box scans you and prints out a prediction of your personality and date of death. It’s better with the mystery, but for the sake of documentation, I’ll bear all.</p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/G9IOsefTPPY" frameborder="0" allowfullscreen></iframe></div>
+<p>There are three spoken word audio tracks that are randomly played along with a set of lights timed to match the voice of the track as it takes you through the process. When you put your head through the curtains, it triggers a <a href="http://www.amazon.co.uk/dp/B007XQRKD4" target="_blank" rel="external">PIR sensor</a> connected to an Arduino Uno, which controls an (Adafruit Neopixel ring)[<a href="http://www.adafruit.com/product/1463" target="_blank" rel="external">http://www.adafruit.com/product/1463</a>], a <a href="https://www.adafruit.com/products/597" target="_blank" rel="external">thermal printer</a> and an (Adafruit Music Maker amped)[<a href="http://www.adafruit.com/product/1788" target="_blank" rel="external">http://www.adafruit.com/product/1788</a>] with a 3w 4ohm speaker. Because the printer and lights need a lot of amps, extra power is provided by a 5v 4 amp wall plug.</p>
+<p><img src="/images/box-of-wonder-1.jpg" alt=""></p>
+<p>In fact, a better choice would have been a 7-12v adapter for the arduino, possibly transformed to 5v for the other components. Although the arduino runs on 5v internally, it actually needs more than this. Once everything was set up, it started resetting when printing due to the power consumption. Very confusing to someone who hasn’t dealt in hardware before.</p>
+<p>The box itself is made from plywood and covered in velvet. I also learned that making a sturdy simple box is a bit harder than it looks from the outside. Inside its covered with some <a href="http://www.amazon.co.uk/Mirror-Roll-Adhesive-Length-Horse/dp/B001RUFZ5C/" target="_blank" rel="external">reflective silver plastic</a>. Works well, but very expensive compared to the rest of the supplies.</p>
+<p><img src="/images/box-of-wonder-2.jpg" alt=""></p>
+<p>The horoscope prediction is assembled from a set of statements that psychologist <a href="http://en.wikipedia.org/wiki/Forer_effect" target="_blank" rel="external">Bertram Forer</a> came up with. They work by making statements that are vague enough and qualified enough to appear to describe anybody. I.e. sometimes you’re open with others but sometimes you feel a bit hostile. The date of death is just a random date from now until 2115. The experience is pretty much as intended. The box itself is intriguing. I get a lot of looks when carting it from place to place, and told off by bus drivers when I leave it in the aisle.</p>
+<p>Nobody believes it’s doing any scanning, but there’s a tiny part of the person that questions if it really knows something. I think this would be heightened if there were genuinely some questioning that it were really doing something - it could respond to interaction to appear intelligent, or make more of a pretence of doing some scanning.</p>
+<p>It would have been nice to have some more ‘scanning’ devices inside the box to enhance the effect. Perhaps a head collar brain scanning thing, a bunch of gears moving around inside. I looked into disassembling a scanner to use the motorised light bar, but controlling it seemed fairly difficult so I didn’t go down that path. In the end, all the ideas I had (eyes on stalks following you around?) were a bit too complex for the scope of this project, so I stuck with the lights and sound.</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/28/heartbeat-jumper/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Heartbeat jumper
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:tech-blog.tomchambers.me">
+  </form>
+</div>
+<footer id="footer">
+	<h1 class="footer-blog-title">
+		<a href="/">Tom Chambers&#39; Tech Blog</a>
+	</h1>
+	<span class="copyright">
+		&copy; 2015 Tom Chambers<br>
+		Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+	</span>
+</footer>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
