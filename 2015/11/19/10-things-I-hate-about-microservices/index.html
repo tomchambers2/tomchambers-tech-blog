@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>10 things I hate about microservices | Tom Chambers&#39; Tech Blog</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="I’ve worked at Guidesmiths for just over a year now and for that time our main client has been TES, an edtech beast with a formerly nightmare inducing .net codebase which we’ve been shuffling over pie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10 things I hate about microservices">
+<meta property="og:url" content="http://tech-blog.tomchambers.me/2015/11/19/10-things-I-hate-about-microservices/index.html">
+<meta property="og:site_name" content="Tom Chambers' Tech Blog">
+<meta property="og:description" content="I’ve worked at Guidesmiths for just over a year now and for that time our main client has been TES, an edtech beast with a formerly nightmare inducing .net codebase which we’ve been shuffling over pie">
+<meta property="og:updated_time" content="2015-11-19T16:02:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10 things I hate about microservices">
+<meta name="twitter:description" content="I’ve worked at Guidesmiths for just over a year now and for that time our main client has been TES, an edtech beast with a formerly nightmare inducing .net codebase which we’ve been shuffling over pie">
+  
+    <link rel="alternative" href="/atom.xml" title="Tom Chambers&#39; Tech Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<div style="text-align:center">
+	<img src="/images/tom-chambers-robot-face.png" alt="">
+</div>
+<header id="header">
+	<h1 class="blog-title">
+		<a href="/">Tom Chambers&#39; Tech Blog</a>
+	</h1>
+	<nav class="nav">
+		<ul>
+			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://tech-blog.tomchambers.me"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-10-things-I-hate-about-microservices" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/11/19/10-things-I-hate-about-microservices/" class="article-date">
+  <time datetime="2015-11-19T16:01:47.000Z" itemprop="datePublished">2015-11-19</time>
+</a>
+		</span>
+		<span class="meta-elements author">Tom Chambers</span>
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      10 things I hate about microservices
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>I’ve worked at Guidesmiths for just over a year now and for that time our main client has been TES, an edtech beast with a formerly nightmare inducing .net codebase which we’ve been shuffling over piece by piece to a nodejs microservices architecture that’s only mildly disturbing.</p>
+<p>The platform has steadily grown from about 15 services to maybe 40 now. By the time I arrived in my current position, the infrastructure was pretty well established and for the most part I’ve been following patterns that were set out as part of the initial design. I was also fairly new to node.js when I started, so I’ve also learned a lot about backend technologies in this period. I’ve had opportunities to learn about mongodb, RabbitMQ and redis at scale and I’ve really been able to bolster my skills as a full stack web developer, something that I wouldn’t have had the chance to do at other companies that wanted me to have a much more narrow focus.</p>
+<p>A caveat in my narrative is that I’ve not had the opportunity to architect a system at scale, so this is a report from the trenches. Which to me seems an appropriate view given that microservices are about giving up the bird’s eye view.</p>
+<p>There’s nothing too complex about a microservice system in principle. You have a lot of individual applications that do one thing and communicate via a strict set of interfaces that treat the inner workings of services as a black box. Problems generally don’t start with the services themselves, it’s more about the complexity in the way they are linked together and the ecosystem they reside in. What follows is are a few of the things I’ve learned in the past year about how to avoid those tangles and find elegant solutions to communication.</p>
+<p>Services should be independent. This is an old principle but it’s something to keep in mind when you’re adding functionality to your services. It’s easy to layer on functionality where it doesn’t fit, and this is doubly true when services are small and dedicated to one thing. When it’s hard to create and deploy new services, people will take the lazy way out and cram it in an existing nook. A good rule of thumb is that a service should be possible to rewrite in a week according to a basic set of specifications.</p>
+<p>On the web you’re generally dealing with a user request that comes through the stack and heads back out in the same direction. Sometimes you’re doing data migration and piping things from one place to another internally, but handling requests tends to be the main thing. It’s easy when you’re designing a system to set up your services in a chain with your data source on one end and the routing on the other end with the various stages of composition in the middle. When you’re designing this, it makes sense and it’s easy because it’s all in your head. When you’re tasked with making a small change (for example, change this bit of copy on a product page where that text is stored in an i18n module and then rendered with a front end framework like React) it can become very difficult to follow that change through various separate repos where the names of the variables are changing and you now have to make 5 commits in those repos just for that one small change.</p>
+<p>The solution to this is to make that chain clearly defined in a single service. That one service should serve be responsible for serving the page and by looking at the handler, you should be able to see a chain where it retrieves the data, transforms it with the i18n module, pulls in shared content like header and footer and then delivers it back.</p>
+<p>Shared client libraries are something that seems like a good idea at the point of starting out. With a fresh system you can be sure in the knowledge that all of your architectural decisions are ideal and will never need to change. Thus you can abstract away implementation details of database connections and config load because the way this is done is the way this is done forever. 6 months or a year later and you find yourself in edge case hell. The database module you’re using no longer works, but now it’s a part of your templates that developers use for creating new services. So they take the easy way out and use that because it’s there, in spite of the problems caused later on. This is not so much of an issue when parts can be easily swapped out independently, but it starts to cause problems when these modules form the means of communication between services, for example loading shared visual components. This is doubly the case when you then write something in another language that doesn’t have the same capabilities.</p>
+<p>When you come onboard a project and tinker with existing things, you learn how to work on top of those fundamentals, but you don’t get to learn those fundamentals. Much like spending time in a building gets you used to how to use it, but not necessarily about how it is actually constructed. If you use complex dependency injection or many custom client libraries that abstract away the intricacies then developers will not have the opportunity to understand. If however, you have to start from scratch each time, you get a chance and indeed are forced to iterate and create something that teaches you about how it works, which leads to faster workflow in the future and means that you are always building on what you know about the system.</p>
+<p>As well as limiting opportunities for learning, it also makes it difficult to make small changes. For example, if you have a module that sets config and steps for the build process and you want to make experimental tweaks or small changes for that particular service, it gets difficult because there is a single place where it’s updated from. Shared libraries are useful for obvious reasons, it allows you to easily update the entire codebase at once rather than repetitively making that change individually in every single place. I’ve found though that with the exception of some business logic that absolutely needs to be in sync the cost of stagnation is greater than the cost of updating various services. Microservices are about heterogenity, and making it easy to try different things means finding better development practices in the long run.</p>
+<p>On the other side of this you have the ecosystem you are putting your services into. It’s really important that your deployment is as simple as possible in order to allow for fast change and growth/death of services as required. This is where having great DevOps comes into play. You can write a simple service that does something useful in 100 lines and it might stay that way for a month or two before it needs to develop. As before, allowing anyone to create new services from scratch means that everyone gets to do architecture, gets to learn about architecture and gets to enjoy themselves much more doing it, all of which result in a system that changes and gets better faster.</p>
+<p>While many aspects of design can be left to the implementers of a particular service, there are some things that you will probably want to have a general policy on. Most importantly the way that services communicate. Data is an important one. Having an API that is the guard for a database makes it easy to make schema changes or change the way that data is stored but it also means n+1 for every call made to that database and you have a bottleneck for those requests in the API service. Alternatively, services can talk directly to the database, which will tax the network less but also mean more maintanance if you want to make schema changes or swap out that database entirely. I’m willing to bet your server costs are a tiny fraction of your dev time, so I don’t see why you’d want to compel developers to spend their time in the weeds laboriously making changes in 5 different places, but there you go. This is absolutely one of the things to watch out for as your system scales. Co-ordination problems that are not apparent with 5 services will become a big deal with 40 services.</p>
+<p>To reiterate my point from previously, chaining is good. It allows you to quickly understand the way a request is handled and what happens and it gives you a single point of contact for making changes to a transformation. If you want it to do more you can insert another step with one change, rather than going to two services to fuse another service inbetween them. Services should be stupid and emaciated. They do their one job well and blindly. Once you start splitting out the functionality of a service into various places, it’s now hard to manage without being aware of all of those things at once. You’re now a professional plate spinner. Continually rebuilding is also essential, and having spider like links to other things means that you can’t simply rebuild a service because it means that you have to redo everything else at the same time, and then why bother having microservices?</p>
+<p>Static assets are one of the most important policy decisions you should make and the point at which building your system will jar the most with the philosophy of microservices. With the current architecture of the internet, there is still a great advantage to minification, CDNs and single domains for serving client side javascript, CSS and images. If you break up the various areas of your site into sections that are served by separate applications you’ll need a step in your build process that brings them all together and pipes them to the CDN and manages the references to them. This can get very complex quickly. When you add in shared components such as header and footer this can get to become a nightmare.</p>
+<p>I don’t know of any good solutions to this problem and it’s one of the places where the browser’s implementation of a website as the rendering of a single document butts up against the decentralized/distributed philosophy of microservices. If you have the luxury of not having to provide consistency, perhaps if your site is a series of loosely interlinked applications, this will make the problem much easier. Really I think we need to change our approach to design, to accommodate what the way the web is transforming, but we’re stuck with this for now. You can of course take the network hit and serve everything from the individual apps, but then there’s a cost imposed on the client which is much more significant than your server costs.</p>
+<p>Of course, there’s a limit to the amount of concious design you can do in any complex system. And that is doubly so when you have a whole bunch of independent components that are designed in isolation.</p>
+<p>Conway’s Law: “organizations which design systems … are constrained to produce designs which are copies of the communication structures of these organizations”</p>
+<p>A lot of the structure of your system will come about as a result of the structure of your organisation. The technology industry has been moving away from hierarchical structure for some time, but what often results is a largely flat structure with a narrow and powerful layer just on top. The organisation I currently work for has a structure like this, and the architecture of their system reflects this. All the independent services are pushed into a funnel with a single routing and composition service. Just like the human communication, this increases the burden of co-ordination, since all service communication must be performed through this single bottleneck (a limiting factor both in realtime and dev time).</p>
+<p>So I think it’s important to pay attention to the human factors in the system. I don’t think that it would be sensible to compose developers into small teams with strict and explicit channels of communication beyond which they don’t communicate. It’s generally a mistake to think that analogy is useful beyond example and understanding. Even in a large organisation you won’t have a direct mapping of people to services and people who have knowledge will come and go.</p>
+<p>There are some useful lessons - if you want to have successful microservices, let go of centralised control of people and the architecture will tend to reflect this. Each developer is going to be responsible for the maintanence of a number of services. This requires that the team frequently divides into cross functional subteams that are just large enough to do that job in a simple and elegant way without the burden of co-ordination.</p>
+<p>Of course, if you divide people over a whole bunch of services, they’ll develop general shallow knowledge and there’ll be a lack of experts in certain areas. On the other hand, if developers are specifically assigned to a small number, they’ll develop a lot of skills in that area but once they leave there’ll be a dark hole in the system.  A balance between the two is probably best. Developers should understand a few points in the system and how they communicate with other points. Trying to understand the system as a whole is futile. Missing knowledge as a result of specialisation or generalisation is also generally mitigated because every service tends to demand a knowledge of the full stack in order to understand how it operates.</p>
+<p>Microservices aren’t complex. It’s just about following a principle of breaking your system down into simple independent components that can be rebuilt quickly which allows for painless iteration. The problems that arise are due to the difficulties of co-ordinating between services and maintaining the system as it grows. How do you find elegant solutions for getting data from one place to another without introducing burdensome complexity?</p>
+<p>For the most part the answer is to keep things separate. Don’t put two pieces of functionality into a single service. Don’t make services dependent on libraries that make it difficult to change those libraries without having to consider the entire system. Have an ecosystem that allows for smooth service creation and deployment. Compose services in a way that allows a process to be quickly understood and altered. Above all keep a system fresh and healthy by allowing services to be rebuilt based on what you know about your system at present, not what you imagined it would be like at the start.</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/05/26/So-you-want-to-organise-a-hackathon/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          So you want to organise a hackathon...
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:tech-blog.tomchambers.me">
+  </form>
+</div>
+<footer id="footer">
+	<h1 class="footer-blog-title">
+		<a href="/">Tom Chambers&#39; Tech Blog</a>
+	</h1>
+	<span class="copyright">
+		&copy; 2015 Tom Chambers<br>
+		Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+	</span>
+</footer>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
