@@ -2,7 +2,7 @@ title: Living portraits
 date: 2015-03-28 19:06:53
 tags:
 ---
-It's a book and website yo. The living portraits project is an idea I had to keep a better kind of memory. One that fits the mediums we have around us in our world today. Imagine someone captured for a moment in a photo, and that moment being stretched out over time.
+It's a book and [website](http://living-portraits.tomchambers.me/) yo. The living portraits project is an idea I had to keep a better kind of memory. One that fits the mediums we have around us in our world today. Imagine someone captured for a moment in a photo, and that moment being stretched out over time.
 
 ![](/images/living-portrait-1.jpg)
 ![](/images/living-portrait-2.jpg)
@@ -21,6 +21,6 @@ I really like the portraits in Harry Potter, they're household objects with anim
 
 Technically this project is actually fairly simple. The book uses a raspberry pi and a cheap rear view camera screen with the casing removed. I cut the book centre out with a jigsaw and glued the remainder of the pages back in to the hardback cover. Power is supplied with a 12v wall adapter and a 5v transformer for the pi.
 
-The website just uses an html5 video with a small amount of javascript to randomly seek every 30 seconds.
+The website just uses an html5 video with a small amount of javascript to randomly seek every 30 seconds. Have a look at the [living portraits website](http://living-portraits.tomchambers.me/)
 
 Another implementation of this project might be a wall mounted frame with a motion sensor, perhaps installed in a home. Whenever a person walks past, the video jumps to a random point, much like the online version.
