@@ -30,6 +30,30 @@ body
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
+.see-more
+  position: absolute
+  top: 30px
+  right: 30px
+  background-color: #000
+  border-radius: 9999px
+  height: 150px
+  width: 150px
+  color: #fff
+  font-weight: bold
+  font-size: 20px
+  text-align: center
+
+.see-more, see-more-inside
+  transition: all 0.3s
+
+.see-more-inside
+  margin: 20px 20px 20px 20px 
+
+.see-more:hover
+  height: 180px
+  width: 180px
+  font-size: 26px
+
 @import "_bass/bass"
 @import "_bass/syntax"
 @import "_partial/header"
