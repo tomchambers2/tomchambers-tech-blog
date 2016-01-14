@@ -2,6 +2,19 @@ title: How to write a simple content modifying Chrome extension
 date: 2016-01-13 17:11:20
 tags:
 ---
+{% blockquote %}
+![](https://lh3.googleusercontent.com/AYEHPqfY8XrOF8fW5Q3RIcIG_5VhsE8inyEY1CjM6KOUSjEgbZZRciffZ70ojjz08Wsq99FQEQ=s640-h400-e365-rw)
+
+A Chrome extension that hides the details of people's deaths from Wikipedia, allowing you to rest easy in the knowledge that everyone ever is alive. And not dead.
+
+<div id="ext">
+	<a href="#" id="download">Add to Chrome</a>
+	![](/images/web-store-badge.png)
+	<small><a href="https://chrome.google.com/webstore/detail/undead/lgdmnghdmjmfnlcponkapgpmdijifoff" target="_blank">See extension page</a></small>
+</div>
+
+{% endblockquote %}
+
 Writing a Chrome extension can be a bit tricky initially, due to it's API and the way you have to structure your code. The [docs](https://developer.chrome.com/extensions) are fairly good however, so take a look at them when building your tool.
 
 In this post I want to show how you can write a simple extension that modifies the content of the page once it's loaded. This is a method used by extensions like the various adblockers to identify and remove adverts. It's a good place to start since it gets you used to the environment without getting too complicated. The whole lot is in javascript, which gives you easy access to the DOM and is essentially like writing client side code except you have a few extra APIs for access to the browser and code is scoped meaning you can't communicate with code that the page loads.
@@ -242,3 +255,18 @@ Now you can open up the popup and reverse the effect of the extension at will. I
 **Note:** this is a very simplified version of what should happen. If this was a real extension it would be a good idea to add a background page that manages state to prevent too much complexity in the UI files and set a tab target and parameters to your messages to limit its effect. Take a look at [message passing](https://developer.chrome.com/extensions/messaging) to learn more.
 
 Now you know what's possible, I'm sure your head will start fizzing over with interesting and useful things you can add to the browser. For a reference once you've grasped the basics, see the [Developer's guide](https://developer.chrome.com/extensions/devguide). The code is a [repo on my github](https://github.com/tomchambers2/undead). If you need help please email me on tom.chambers@gmail.com.
+
+<script>
+window.onload = function() {
+	var ext = document.getElementById('ext');
+	document.getElementById('download').addEventListener('click', function(e) {
+		e.preventDefault();
+		chrome.webstore.install(undefined, function() {
+				ext.innerHTML = 'Thanks for installing undead'
+			}, function(err) {
+        	console.log(err);
+        	ext.innerHTML = 'That didn\'t work, sorry'
+    	});
+	});
+}
+</script>
