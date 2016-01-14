@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/lgdmnghdmjmfnlcponkapgpmdijifoff">
   <meta charset="utf-8">
   
   <title>Tom Chambers&#39; Tech Blog</title>
@@ -75,7 +76,10 @@
 	</header>
 	<div class="entry-content">
 		
-    	<p>Writing a Chrome extension can be a bit tricky initially, due to it’s API and the way you have to structure your code. The <a href="https://developer.chrome.com/extensions" target="_blank" rel="external">docs</a> are fairly good however, so take a look at them when building your tool.</p>
+    	<blockquote><p><img src="https://lh3.googleusercontent.com/AYEHPqfY8XrOF8fW5Q3RIcIG_5VhsE8inyEY1CjM6KOUSjEgbZZRciffZ70ojjz08Wsq99FQEQ=s640-h400-e365-rw" alt=""></p>
+<p>A Chrome extension that hides the details of people’s deaths from Wikipedia, allowing you to rest easy in the knowledge that everyone ever is alive. And not dead.</p>
+<div id="ext"><br>    <a href="#" id="download">Add to Chrome</a><br>    <img src="/images/web-store-badge.png" alt=""><br>    <small><a href="https://chrome.google.com/webstore/detail/undead/lgdmnghdmjmfnlcponkapgpmdijifoff" target="_blank">See extension page</a></small><br></div></blockquote>
+<p>Writing a Chrome extension can be a bit tricky initially, due to it’s API and the way you have to structure your code. The <a href="https://developer.chrome.com/extensions" target="_blank" rel="external">docs</a> are fairly good however, so take a look at them when building your tool.</p>
 <p>In this post I want to show how you can write a simple extension that modifies the content of the page once it’s loaded. This is a method used by extensions like the various adblockers to identify and remove adverts. It’s a good place to start since it gets you used to the environment without getting too complicated. The whole lot is in javascript, which gives you easy access to the DOM and is essentially like writing client side code except you have a few extra APIs for access to the browser and code is scoped meaning you can’t communicate with code that the page loads.</p>
 <h2 id="Setting_up">Setting up</h2><p>Every extension needs a manifest file. It declares what files are a part of your project and tells Chrome how to use them. You also set metadata like icons and descriptions which will be used when you upload your extension to the Chrome app store (this is the only sensible way to distribute it outside of a corporate environment).</p>
 <figure class="highlight json"><figcaption><span>[manifest.json] []</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">manifest_version</span>": <span class="value"><span class="number">2</span></span>,</span><br><span class="line"></span><br><span class="line">  "<span class="attribute">name</span>": <span class="value"><span class="string">"My new extension"</span></span>,</span><br><span class="line">  "<span class="attribute">description</span>": <span class="value"><span class="string">"It does stuff"</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>": <span class="value"><span class="string">"1"</span></span>,</span><br><span class="line"></span><br><span class="line">  "<span class="attribute">icons</span>": <span class="value">&#123; "<span class="attribute">16</span>": <span class="value"><span class="string">"ext_16.png"</span></span>,</span><br><span class="line">           "<span class="attribute">48</span>": <span class="value"><span class="string">"ext_48.png"</span></span>,</span><br><span class="line">          "<span class="attribute">128</span>": <span class="value"><span class="string">"ext_128.png"</span> </span>&#125;</span>,  </span><br><span class="line"></span><br><span class="line">  "<span class="attribute">background</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">page</span>": <span class="value"><span class="string">"background.html"</span></span><br><span class="line">  </span>&#125;</span>,  </span><br><span class="line">  "<span class="attribute">content_scripts</span>": <span class="value">[</span><br><span class="line">    &#123;</span><br><span class="line">      "<span class="attribute">matches</span>": <span class="value">[<span class="string">"https://www.site-to-run-on.com/*"</span>]</span>,</span><br><span class="line">      "<span class="attribute">js</span>": <span class="value">[<span class="string">"helper_library.js"</span>, <span class="string">"content_script.js"</span>]</span><br><span class="line">    </span>&#125;</span><br><span class="line">  ]</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -133,7 +137,20 @@
 <p>Now you can open up the popup and reverse the effect of the extension at will. In this case $(document).ready is necessary because javascript loads normally as specified in the HTML rather than injected in by Chrome.</p>
 <p><strong>Note:</strong> this is a very simplified version of what should happen. If this was a real extension it would be a good idea to add a background page that manages state to prevent too much complexity in the UI files and set a tab target and parameters to your messages to limit its effect. Take a look at <a href="https://developer.chrome.com/extensions/messaging" target="_blank" rel="external">message passing</a> to learn more.</p>
 <p>Now you know what’s possible, I’m sure your head will start fizzing over with interesting and useful things you can add to the browser. For a reference once you’ve grasped the basics, see the <a href="https://developer.chrome.com/extensions/devguide" target="_blank" rel="external">Developer’s guide</a>. The code is a <a href="https://github.com/tomchambers2/undead" target="_blank" rel="external">repo on my github</a>. If you need help please email me on tom.chambers@gmail.com.</p>
-
+<script>
+window.onload = function() {
+    var ext = document.getElementById('ext');
+    document.getElementById('download').addEventListener('click', function(e) {
+        e.preventDefault();
+        chrome.webstore.install(undefined, function() {
+                ext.innerHTML = 'Thanks for installing undead'
+            }, function(err) {
+            console.log(err);
+            ext.innerHTML = 'That didn\'t work, sorry'
+        });
+    });
+}
+</script>
     
 	</div>
 	<footer class="entry-footer">
